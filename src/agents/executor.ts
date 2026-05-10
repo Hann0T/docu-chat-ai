@@ -1,4 +1,6 @@
 import { AGENT_SYSTEM_PROMPT } from "../config/prompts";
+import { AGENT_EVENTS } from "../events/agent.events";
+import { eventBus } from "../lib/events";
 import { openaiBreaker } from "../lib/http/openai.breaker";
 import { logger } from "../lib/logger";
 import { getToolSchemas, TOOL_REGISTRY } from "./tools/registry";
@@ -53,7 +55,7 @@ export async function runAgent(options: {
   const startTime = Date.now();
 
   const messages: any[] = [
-    {role: 'system', content: AGENT_SYSTEM_PROMPT},
+    { role: 'system', content: AGENT_SYSTEM_PROMPT },
     { role: 'user', content: question }
   ];
 
